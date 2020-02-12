@@ -26,7 +26,7 @@ export class GlobalHeader {
 						
 					// Freeze Page Scroll
 					html.classList.toggle('freeze');
-				}, false );
+				})
 				
 				// Escape Key  : Show / Hide Small Screen Nav
 				document.addEventListener('keydown', (evt) => {
