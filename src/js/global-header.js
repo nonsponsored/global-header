@@ -1,27 +1,50 @@
-const globalHeader = function(selector) {
-	'use strict';
-
-	if ( document.body.contains( document.querySelector(selector) ) ) {		
-		let header = document.querySelector(selector),
-			menuButton = header.querySelector('.js-openMenu');
-	
-		// Show / Hide Small Screen Nav
-		menuButton.addEventListener('click', function(e) {
-			e.preventDefault();
+export class GlobalHeader {
+	constructor(selector) {
+		
+		// Wait for DOM
+		document.addEventListener('DOMContentLoaded', () => {
 			
-			// Toggle Aria
-			if(this.getAttribute('aria-expanded') === 'false') {
-		        this.setAttribute('aria-expanded','true');	
-		    } else {
-			    this.setAttribute('aria-expanded','false');
-		    }
+			if ( document.body.contains( document.querySelector(selector) ) ) {		
+				const html = document.getElementsByTagName('html')[0],
+					  header = document.querySelector(selector),
+					  nav = header.querySelector('.global-header__nav'),
+					  menuButton = header.querySelector('.js-openMenu');
+			
+				// Menu Button : Show / Hide Small Screen Nav
+				menuButton.addEventListener('click', (e) => {
+					e.preventDefault();
 					
-			// Freeze Page Scroll
-			document.getElementsByTagName('html')[0].classList.toggle('freeze');
-		}, false );
+					// Toggle Button State
+					e.currentTarget.classList.toggle('menu-button--active');
+					
+					// Toggle Aria
+					if(!nav.hasAttribute('aria-expanded')) {
+					    nav.setAttribute('aria-expanded','true');	
+					} else {
+					    nav.removeAttribute('aria-expanded');
+					}
+						
+					// Freeze Page Scroll
+					html.classList.toggle('freeze');
+				}, false );
+				
+				// Escape Key  : Show / Hide Small Screen Nav
+				document.addEventListener('keydown', (evt) => {
+					if ( menuButton.classList.contains('menu-button--active') ) {
+						evt = evt || window.event;
+						if (evt.keyCode == 27) {
+							// Rest Menu Button
+							menuButton.classList.remove('menu-button--active');
+							
+							// Remove Aria
+							nav.removeAttribute('aria-expanded');
+							
+							// Remove Page Freeze
+							html.classList.remove('freeze');
+						}
+					}
+				})
+			}
+		})
 	}
-};
-
-window.addEventListener('load', function() {
-	globalHeader('.global-header');
-}, false);
+}

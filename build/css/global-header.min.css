@@ -120,7 +120,7 @@ a:focus, button:focus {
       height: auto;
       transition: opacity 250ms var(--easing);
       opacity: 1; }
-  .global-header button[aria-expanded="true"] ~ .global-header__nav {
+  .global-header .global-header__nav[aria-expanded="true"] {
     transform: translateX(100%); }
   .menu-button {
     --line-color: #444;
@@ -142,7 +142,8 @@ a:focus, button:focus {
     text-indent: 100%;
     transition: background-image 250ms 250ms;
     width: 40px;
-    z-index: 2; }
+    z-index: 2;
+    /* Active State */ }
     .menu-button:before, .menu-button:after {
       background-color: var(--line-color);
       content: '';
@@ -159,14 +160,14 @@ a:focus, button:focus {
     .menu-button:after {
       bottom: 8px;
       transition-property: bottom, transform; }
-  .menu-button[aria-expanded="true"] {
-    background: linear-gradient(to right, transparent, transparent); }
-  .menu-button[aria-expanded="true"]::before {
-    top: calc(50% - var(--line-width)/3);
-    transform: rotate(45deg); }
-  .menu-button[aria-expanded="true"]::after {
-    bottom: calc(50% - var(--line-width)/3);
-    transform: rotate(-45deg); } }
+    .menu-button--active {
+      background: linear-gradient(to right, transparent, transparent); }
+    .menu-button--active::before {
+      top: calc(50% - var(--line-width)/3);
+      transform: rotate(45deg); }
+    .menu-button--active::after {
+      bottom: calc(50% - var(--line-width)/3);
+      transform: rotate(-45deg); } }
 
 @media all and (min-width: 1024px) {
   .global-header__content {

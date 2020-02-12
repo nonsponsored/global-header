@@ -183,7 +183,7 @@ a:focus, button:focus {
 		}
 		
 		//* State : Open Nav
-		button[aria-expanded="true"] ~ .global-header__nav {
+		.global-header__nav[aria-expanded="true"] {
 			transform: translateX(100%);
 		}
 	}
@@ -233,17 +233,19 @@ a:focus, button:focus {
 			bottom: 8px;
 			transition-property: bottom, transform;
 		}
-	}
-	.menu-button[aria-expanded="true"] {
-		background: linear-gradient(to right, transparent, transparent);
-	}
-	.menu-button[aria-expanded="true"]::before {
-		top: calc(50% - var(--line-width)/3);
-		transform: rotate(45deg);
-	}
-	.menu-button[aria-expanded="true"]::after {
-		bottom: calc(50% - var(--line-width)/3);
-		transform: rotate(-45deg);
+	
+		/* Active State */
+		&--active {
+			background: linear-gradient(to right, transparent, transparent);
+		}
+		&--active::before {
+			top: calc(50% - var(--line-width)/3);
+			transform: rotate(45deg);
+		}
+		&--active::after {
+			bottom: calc(50% - var(--line-width)/3);
+			transform: rotate(-45deg);
+		}
 	}
 }
 
